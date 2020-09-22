@@ -1,11 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
+import somePlaces from '../../StoreData/SomePlaces';
+import Header from '../Header/Header';
+import Place from '../Place/Place';
+import  "./Home.css";
 
 const Home = () => {
+
+    const [places,setPlaces] = useState(somePlaces);
+
+    const style = {
+        display: 'flex',
+        margin: '50px',
+        // justifyContent: 'space-between',
+       
+    }
+    
     return (
-        <div>
-            <h1>This is a Home</h1>
+      <section className='homeStyle '>
+         <Header></Header>
+        <div  style={style} >
+            <div className='coxPart col-5'>
+                <h1>Cox's Bazar</h1>
+                <h6>Cox's Bazar is a city, fishing port, 
+                    tourism centre and district headquarters 
+                    in southeastern Bangladesh. It is famous 
+                    mostly for its long natural sandy beach, 
+                    and it is infamous for the largest refugee 
+                    camp in the world. ...
+                    </h6>
+                    <br/>
+                {/* <button className=''>Booking-></button> */}
+            </div>
+                {
+                    places.map(place => <Place key={place.bedType} place={place}></Place>)
+                }
         </div>
+      </section>
     );
 };
-
 export default Home;

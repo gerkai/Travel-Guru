@@ -1,29 +1,23 @@
-import { Link } from '@material-ui/core';
 import React from 'react';
 import './Header.css';
-
-import header from '../Images/Rectangle 1.png';
-import logo from '../Images/Logo.png';
+import logo from '../Images/logo-1.png';
+import { Link } from 'react-router-dom';
 const Header = () => {
     return (
-        <div style={{ backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${header})` }} className="header">
-            <nav className="nav">
+        <div className="header">
+        <div className='row'>
+            <nav className="nav ">
                 <ul>
-                    <li>
-                        <img className="logo" src={logo} alt=""/>
-                    </li>
-                    <li>
-                        <Link to="/home">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/login">Login</Link>
-                    </li>
-                    <li>
-                        <Link className="btn-book" to="/book">Book</Link>
-                    </li>
+                    <li><Link to="/home"> <img className="logo" src={logo} alt=""/></Link></li>
+                    <li><input type="text" placeholder="Search destination" name="search"/></li>
+                    <li><Link to="/home">News</Link></li>
+                    <li><Link to="/home">Destination</Link></li>
+                    <li><Link to="/home">Blog</Link></li>    
+                    <li><Link to="/home">Contact</Link></li>
+                    <li><button className="btn-primary" ><Link to="/login">Login</Link></button></li>    
                 </ul>
             </nav>
-           
+        </div>
         </div>
     );
 };
