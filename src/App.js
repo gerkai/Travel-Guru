@@ -7,8 +7,6 @@ import Book from "./components/Book/Book";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Hotel from "./components/Hotel/Hotel";
 import Signup from "./components/SignUp/SignUp";
-import Header from "./components/Header/Header";
-
 export const UserContext = createContext();
 
 function App() {

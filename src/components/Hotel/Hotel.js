@@ -15,7 +15,9 @@ class App extends Component {
     return (
       <section className="  row col-12">
         <div className="col-6">
-          <h2>Cox's Bazar .</h2>
+          <h2>Cox's Bazar hotel.</h2>
+          <img className = 'col-8' src={"https://i.ibb.co/pxyCwvG/room-1.png" } alt=""/>
+          <img className = 'col-8' src={"https://i.ibb.co/TqqFDW7/room-2.png" } alt=""/>
         </div>
         <div className="col-6" style={{ height: "100vh", width: " 100%" }}>
           <GoogleMapReact

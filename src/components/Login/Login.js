@@ -20,9 +20,7 @@ const Login = () => {
     firebase.initializeApp(firebaseConfig);
   }
 
-  const [newUser, setNewUser] = useState(false);
-
-  const provider = new firebase.auth.GoogleAuthProvider();
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
   var fbProvider = new firebase.auth.FacebookAuthProvider();
   const gitProvider = new firebase.auth.GithubAuthProvider();
   const [user, setUser] = useState({
@@ -30,23 +28,17 @@ const Login = () => {
     newUser: false,
     name: "",
     email: "",
-    photo: "",
   });
   const handleGoogleSignIn = () => {
     firebase
       .auth()
-      .signInWithPopup(provider)
-
+      .signInWithPopup(googleProvider)
       .then((result) => {
         const { displayName, email } = result.user;
         const signedInUser = { name: displayName, email };
         setLoggedInUser(signedInUser);
         history.replace(from);
         setUser(signedInUser);
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log(error.message);
       });
   };
 
@@ -59,10 +51,6 @@ const Login = () => {
         const signedInUser = { name: displayName, email };
         setLoggedInUser(signedInUser);
         history.replace(from);
-      })
-      .catch(function (error) {
-        var errorMessage = error.message;
-        console.log(errorMessage);
       });
   };
 
@@ -75,38 +63,7 @@ const Login = () => {
         const signedInUser = { name: displayName, email };
         setLoggedInUser(signedInUser);
         history.replace(from);
-        console.log(signedInUser);
-      })
-      .catch(function (error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        var email = error.email;
-        var credential = error.credential;
-        console.log(errorCode, errorMessage, email, credential);
       });
-  };
-
-  const handleSignOut = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then((result) => {
-        const signOutUser = {
-          isSignedIn: false,
-          newUser: false,
-          name: "",
-          email: "",
-          photo: "",
-          error: "",
-          success: false,
-        };
-        setUser(signOutUser);
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log(error.message);
-      });
-    console.log("sign out");
   };
 
   const handleBlur = (event) => {
@@ -141,18 +98,10 @@ const Login = () => {
           newUserInfo.error = "";
           newUserInfo.success = true;
           setUser(newUserInfo);
-          updateUserName(user.name);
-        })
-        .catch((error) => {
-          const newUserInfo = { ...user };
-          newUserInfo.error = error.message;
-          newUserInfo.success = false;
-          setUser(newUserInfo);
-          updateUserName(user.name);
         });
     }
 
-    if (!newUser && user.email && user.password) {
+    if (user.email && user.password) {
       firebase
         .auth()
         .signInWithEmailAndPassword(user.email, user.password)
@@ -161,42 +110,15 @@ const Login = () => {
           newUserInfo.error = "";
           newUserInfo.success = true;
           setUser(newUserInfo);
-        })
-        .catch(function (error) {
-          const newUserInfo = { ...user };
-          newUserInfo.error = error.message;
-          newUserInfo.success = false;
-          setUser(newUserInfo);
         });
     }
     event.preventDefault();
   };
 
-  const updateUserName = (name) => {
-    const user = firebase.auth().currentUser;
-    user
-      .updateProfile({
-        displayName: name,
-      })
-      .then(function () {
-        console.log("User name updated successfully");
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-  };
   return (
     <div className="App">
       <h2>Authentication System</h2>
       <form onSubmit={handleSubmit} action="">
-        {newUser && (
-          <input
-            type="text"
-            name="name"
-            onBlur={handleBlur}
-            placeholder="Your name"
-          />
-        )}
         <br />
         <input
           type="text"
@@ -217,26 +139,17 @@ const Login = () => {
         <input type="submit" value="submit" />
         <br />
         <br />
-        {user.isSignedIn ? (
-          <button onClick={handleSignOut}>Sign Out</button>
-        ) : (
-          <div>
-            <button onClick={handleGoogleSignIn}>Google Sign In</button>
-            <br />
-            <button onClick={handleFacebookLogin}>Facebook Sign in</button>
-            <br />
-            <button onClick={handleGitHubLogin}>Sign in GitHub</button>
-          </div>
-        )}
+        <div>
+          <button onClick={handleGoogleSignIn}>Google Sign In</button>
+          <br />
+          <button onClick={handleFacebookLogin}>Facebook Sign in</button>
+          <br />
+          <button onClick={handleGitHubLogin}>Sign in GitHub</button>
+        </div>
+
         <br />
         <Link to="/signup">Don't have an account?</Link>
       </form>
-      <p style={{ color: "red" }}>{user.error}</p>
-      {user.success && (
-        <p style={{ color: "green" }}>
-          User {newUser ? "created" : "logged in"} Success
-        </p>
-      )}
     </div>
   );
 };
