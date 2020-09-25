@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-// import './App.css';
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import { Link } from "react-router-dom";
@@ -11,7 +10,6 @@ firebase.initializeApp(firebaseConfig);
 
 const Login = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-  // console.log(loggedInUser);
 
   const history = useHistory();
   const location = useLocation();
@@ -40,21 +38,11 @@ const Login = () => {
       .signInWithPopup(provider)
 
       .then((result) => {
-        // const {email,displayName,photoURL} = result.user;
         const { displayName, email } = result.user;
         const signedInUser = { name: displayName, email };
         setLoggedInUser(signedInUser);
         history.replace(from);
-        console.log(signedInUser);
-        // const signedInUser ={
-        //   isSignedIn: true,
-        //   name:displayName,
-        //   email:email,
-        //   photo:photoURL
-        // }
-
         setUser(signedInUser);
-        //  console.log(email,displayName,photoURL);
       })
       .catch((error) => {
         console.log(error);
@@ -67,21 +55,14 @@ const Login = () => {
       .auth()
       .signInWithPopup(fbProvider)
       .then(function (result) {
-       
-        var user = result.user; 
-        console.log(user);
-
-
         const { displayName, email } = result.user;
-        const signedInUser = { name: displayName, email};
+        const signedInUser = { name: displayName, email };
         setLoggedInUser(signedInUser);
         history.replace(from);
-        // console.log("sing in user name", signedInUser);
-
       })
-      .catch(function (error) {      
+      .catch(function (error) {
         var errorMessage = error.message;
-        console.log( errorMessage);
+        console.log(errorMessage);
       });
   };
 
@@ -90,30 +71,18 @@ const Login = () => {
       .auth()
       .signInWithPopup(gitProvider)
       .then(function (result) {
-        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        console.log("This is git hub user name =", token, user);
-
         const { displayName, email } = result.user;
         const signedInUser = { name: displayName, email };
         setLoggedInUser(signedInUser);
         history.replace(from);
         console.log(signedInUser);
-
-        // ...
       })
       .catch(function (error) {
-        // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        // The email of the user's account used.
         var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
         console.log(errorCode, errorMessage, email, credential);
-        // ...
       });
   };
 
@@ -142,10 +111,8 @@ const Login = () => {
 
   const handleBlur = (event) => {
     let isFieldValid = true;
-    //  console.log(event.target.name,event.target.value);
     if (event.target.name === "email") {
       isFieldValid = /\S+@\S+\.\S+/.test(event.target.value);
-      // console.log(isEmailValid);
     }
     if (event.target.name === "password") {
       const isPasswordValid = event.target.value.length > 6;
@@ -154,7 +121,7 @@ const Login = () => {
     }
     if (isFieldValid) {
       const newUserInfo = { ...user };
-      newUserInfo[event.target.name] = event.target.value; //here name value is changeable
+      newUserInfo[event.target.name] = event.target.value;
       setUser(newUserInfo);
     }
   };
@@ -162,19 +129,14 @@ const Login = () => {
   const handleSubmit = (event) => {
     console.log(user.email, user.password);
     if (user.email && user.password) {
-      // console.log("Submitting");
       firebase
         .auth()
         .createUserWithEmailAndPassword(user.email, user.password)
         .then((result) => {
-          // console.log(result);
-
           const { displayName, email } = result.user;
           const signedInUser = { name: displayName, email };
           setLoggedInUser(signedInUser);
           history.replace(from);
-          console.log("sing in user name", signedInUser);
-
           const newUserInfo = { ...user };
           newUserInfo.error = "";
           newUserInfo.success = true;
@@ -199,7 +161,6 @@ const Login = () => {
           newUserInfo.error = "";
           newUserInfo.success = true;
           setUser(newUserInfo);
-          console.log("sign in user info", result.user);
         })
         .catch(function (error) {
           const newUserInfo = { ...user };
@@ -213,7 +174,6 @@ const Login = () => {
 
   const updateUserName = (name) => {
     const user = firebase.auth().currentUser;
-
     user
       .updateProfile({
         displayName: name,
@@ -227,10 +187,7 @@ const Login = () => {
   };
   return (
     <div className="App">
-      <h2>Authentication Information</h2>
-      {/* <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id=""/> */}
-      {/* <level html="newUser">New User sign Up.</level> */}
-
+      <h2>Authentication System</h2>
       <form onSubmit={handleSubmit} action="">
         {newUser && (
           <input

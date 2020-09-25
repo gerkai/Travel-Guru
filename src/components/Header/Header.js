@@ -10,7 +10,6 @@ const Header = () => {
           <ul>
             <li>
               <Link to="/home">
-                {" "}
                 <img className="logo" src={logo} alt="" />
               </Link>
             </li>

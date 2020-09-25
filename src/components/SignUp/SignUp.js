@@ -8,6 +8,9 @@ function Signup() {
     <div className="App">
       <Form>
         <h2>Sign Up</h2>
+        <br/>
+        <Input type="text" placeholder="your name" />
+        <br/>
         <Input type="email" placeholder="email" />
         <br />
         <Input type="password" placeholder="password" />

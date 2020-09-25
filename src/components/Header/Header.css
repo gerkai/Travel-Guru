@@ -1,25 +1,21 @@
-.header{
-
-    /* height:300px; */
-    display: flex;
-    align-items: center top;
+.header {
+  display: flex;
+  align-items: center top;
 }
-.header .logo{
-    height: 50px;
+.header .logo {
+  height: 50px;
 }
-.nav{
-    margin-left: 40px;
-    margin-top: 40px;
+.nav {
+  margin-left: 40px;
+  margin-top: 40px;
 }
-.nav li{
-    display: inline;
-    margin-left: 60px;
-  }
-  .nav a{
-    text-decoration: none;
-    color: rgba(15, 15, 15, 0.877);
-    font-weight: bold;
-    margin-top: 220px;
-  }
-
-  
+.nav li {
+  display: inline;
+  margin-left: 60px;
+}
+.nav a {
+  text-decoration: none;
+  color: rgba(15, 15, 15, 0.877);
+  font-weight: bold;
+  margin-top: 220px;
+}

@@ -22,7 +22,6 @@ const useStyles = makeStyles({
   },
   media: {
     height: 200,
-    // margin :111,
   },
   actions: {
     margin: "2px",
@@ -34,7 +33,6 @@ const useStyles = makeStyles({
 
 const Place = (props) => {
   const { placeName, imgUrl } = props.place;
-  // console.log(props.place)
 
   const classes = useStyles();
 
@@ -47,10 +45,6 @@ const Place = (props) => {
       <CardActionArea>
         <CardMedia className={classes.media} image={imgUrl} title={placeName} />
         <CardContent className={classes.content}>
-          {/* <Typography gutterBottom variant="h5" component="h2"> */}
-          {/* {place.placeName} */}
-          {/* </Typography> */}
-
           <Typography variant="body2" color="textSecondary" component="p">
             {placeName}
           </Typography>

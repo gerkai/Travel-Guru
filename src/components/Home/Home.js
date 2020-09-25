@@ -10,7 +10,6 @@ const Home = () => {
   const style = {
     display: "flex",
     margin: "50px",
-    // justifyContent: 'space-between',
   };
 
   return (
@@ -26,12 +25,11 @@ const Home = () => {
             camp in the world. ...
           </h6>
           <br />
-          {/* <button className=''>Booking-></button> */}
         </div>
-        <div className = 'col-12'>
-        {places.map((place) => (
-          <Place key={place.bedType} place={place}></Place>
-        ))}
+        <div className="col-12">
+          {places.map((place) => (
+            <Place key={place.bedType} place={place}></Place>
+          ))}
         </div>
       </div>
     </section>
