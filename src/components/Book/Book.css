@@ -1,0 +1,10 @@
+.bookStyle {
+  color: whitesmoke;
+  background-image: url("https://i.ibb.co/Y283NmH/cox2.jpg");
+  background-size: cover;
+  height: 100vh;
+}
+
+.centeredly {
+  text-align: center;
+}
