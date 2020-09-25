@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <section className="  row col-12">
         <div className="col-6">
-          <h2>Cox's Bazar hotel.</h2>
+          <h2>Cox's Bazar .</h2>
         </div>
         <div className="col-6" style={{ height: "100vh", width: " 100%" }}>
           <GoogleMapReact
